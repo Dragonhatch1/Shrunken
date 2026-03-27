@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.event;
+package com.xyrth.shrunken.event;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;

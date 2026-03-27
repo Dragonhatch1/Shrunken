@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.util;
+package com.xyrth.shrunken.util;
 
 import java.io.File;
 

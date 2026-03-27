@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.event.spawn.entity;
+package com.xyrth.shrunken.event.spawn.entity;
 
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -6,7 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
-import com.xyrth.twitchy.event.GenericSpawnEvent;
+import com.xyrth.shrunken.event.GenericSpawnEvent;
 
 /**
  * Basic Spawn Template for TF/Regular Mobs on server-side.

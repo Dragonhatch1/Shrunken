@@ -1,8 +1,8 @@
-package com.xyrth.twitchy;
+package com.xyrth.shrunken;
 
-import com.xyrth.twitchy.command.EventCommand;
-import com.xyrth.twitchy.util.Config;
-import com.xyrth.twitchy.util.LogUtil;
+import com.xyrth.shrunken.command.EventCommand;
+import com.xyrth.shrunken.util.Config;
+import com.xyrth.shrunken.util.LogUtil;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -18,9 +18,9 @@ public class CommonProxy {
 
         // Initializing the network wrapper
         // SimpleNetworkWrapper networkRegistry = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
-        // networkRegistry.registerMessage(TwitchyPacketHandler.class, TwitchyPacket.class, 0, Side.SERVER);
+        // networkRegistry.registerMessage(ShrunkenPacketHandler.class, ShrunkenPacket.class, 0, Side.SERVER);
 
-        LogUtil.info("Twitchy is running at " + Tags.VERSION);
+        LogUtil.info("Shrunken is running at " + Tags.VERSION);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)

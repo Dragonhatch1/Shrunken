@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.event.spawn;
+package com.xyrth.shrunken.event.spawn;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -8,7 +8,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import com.xyrth.twitchy.event.GenericSpawnEvent;
+import com.xyrth.shrunken.event.GenericSpawnEvent;
 
 import twilightforest.entity.TFCreatures;
 

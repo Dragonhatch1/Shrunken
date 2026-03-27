@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.event;
+package com.xyrth.shrunken.event;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
@@ -50,5 +50,5 @@ public abstract class GenericSpawnEvent extends WorldEvent {
         this.amount = amount;
     }
     // !spawn FireBeetle hp:4 att:11 speed:3 amount:10 <- user requests spawn in chat
-    // /twitchy FireBeetle 4 11 3 requester:username amount <- sent from GTNHBot through Rcon
+    // /shrunken FireBeetle 4 11 3 requester:username amount <- sent from GTNHBot through Rcon
 }

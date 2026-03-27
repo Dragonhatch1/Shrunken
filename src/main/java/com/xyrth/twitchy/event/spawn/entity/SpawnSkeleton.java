@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.event.spawn.entity;
+package com.xyrth.shrunken.event.spawn.entity;
 
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;

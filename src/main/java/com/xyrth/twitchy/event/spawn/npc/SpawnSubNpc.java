@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.event.spawn.npc;
+package com.xyrth.shrunken.event.spawn.npc;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -9,7 +9,7 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.world.World;
 
-import com.xyrth.twitchy.event.GenericNpcEvent;
+import com.xyrth.shrunken.event.GenericNpcEvent;
 
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCGolem;

@@ -1,8 +1,8 @@
-package com.xyrth.twitchy.util;
+package com.xyrth.shrunken.util;
 
 import org.apache.logging.log4j.Level;
 
-import com.xyrth.twitchy.reference.Reference;
+import com.xyrth.shrunken.reference.Reference;
 
 import cpw.mods.fml.common.FMLLog;
 

@@ -1,6 +1,6 @@
-package com.xyrth.twitchy;
+package com.xyrth.shrunken;
 
-import com.xyrth.twitchy.reference.Reference;
+import com.xyrth.shrunken.reference.Reference;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -15,9 +15,9 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
     name = Reference.MOD_NAME,
     dependencies = "required-after:TwilightForest",
     acceptedMinecraftVersions = "[1.7.10]")
-public class Twitchy {
+public class Shrunken {
 
-    public static Twitchy instance;
+    public static Shrunken instance;
 
     @SidedProxy(clientSide = Reference.CLIENTSIDE, serverSide = Reference.SERVERSIDE)
     public static CommonProxy proxy;

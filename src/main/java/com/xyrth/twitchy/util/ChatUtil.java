@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.util;
+package com.xyrth.shrunken.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

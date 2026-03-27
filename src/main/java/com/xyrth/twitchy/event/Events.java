@@ -1,4 +1,4 @@
-package com.xyrth.twitchy.event;
+package com.xyrth.shrunken.event;
 
 import java.util.Random;
 
@@ -18,57 +18,57 @@ public class Events {
         switch (mob) {
             case 0:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Skeleton");
+                    player.sendChatMessage("/shrunken Skeleton");
                 }
                 break;
             case 1:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Zombie");
+                    player.sendChatMessage("/shrunken Zombie");
                 }
                 break;
             case 2:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Chicken");
+                    player.sendChatMessage("/shrunken Chicken");
                 }
                 break;
             case 3:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Cow");
+                    player.sendChatMessage("/shrunken Cow");
                 }
                 break;
             case 4:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Slime");
+                    player.sendChatMessage("/shrunken Slime");
                 }
                 break;
             case 5:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy DireWolf");
+                    player.sendChatMessage("/shrunken DireWolf");
                 }
                 break;
             case 6:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy FallenKnight");
+                    player.sendChatMessage("/shrunken FallenKnight");
                 }
                 break;
             case 7:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Golem");
+                    player.sendChatMessage("/shrunken Golem");
                 }
                 break;
             case 8:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Sheep");
+                    player.sendChatMessage("/shrunken Sheep");
                 }
                 break;
             case 9:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Pig");
+                    player.sendChatMessage("/shrunken Pig");
                 }
                 break;
             case 10:
                 for (int x = 0; x < 10; x++) {
-                    player.sendChatMessage("/twitchy Sentry");
+                    player.sendChatMessage("/shrunken Sentry");
                 }
                 break;
             default:
@@ -78,7 +78,7 @@ public class Events {
 
     /**
      * Potion Section
-     * /twitchy potion (potionid, duration, amplification)
+     * /shrunken potion (potionid, duration, amplification)
      */
     public static void randompotion(EntityClientPlayerMP player) {
         Random r = new Random();
@@ -138,57 +138,57 @@ public class Events {
             case 0:
                 // wither 9%
                 // player.sendChatMessage("wither 16%");
-                player.sendChatMessage("/twitchy potion 20 200 10");
+                player.sendChatMessage("/shrunken potion 20 200 10");
                 break;
             case 1:
                 // paralysis 10%
                 // player.sendChatMessage("paralysis 16%");
-                player.sendChatMessage("/twitchy potion 25 200 0");
+                player.sendChatMessage("/shrunken potion 25 200 0");
                 break;
             case 2:
                 // possession 9%
                 // player.sendChatMessage("possession 16%");
-                player.sendChatMessage("/twitchy potion 26 100 0");
+                player.sendChatMessage("/shrunken potion 26 100 0");
                 break;
             case 3:
                 // speed 10%
                 // player.sendChatMessage("speed 16%");
-                player.sendChatMessage("/twitchy potion 1 1200 100");
+                player.sendChatMessage("/shrunken potion 1 1200 100");
                 break;
             case 4:
                 // Fire fuse 9%
                 // player.sendChatMessage("Fire Fuse 16%");
-                player.sendChatMessage("/twitchy potion 109 25 2");
+                player.sendChatMessage("/shrunken potion 109 25 2");
                 break;
             case 5:
                 // Resized 11%
                 // player.sendChatMessage("Resized 16%");
-                player.sendChatMessage("/twitchy potion 77 3600 100");
+                player.sendChatMessage("/shrunken potion 77 3600 100");
                 break;
             case 6:
                 // Waking Nightmare 10%
                 // player.sendChatMessage("Waking Nightmare 16%");
-                player.sendChatMessage("/twitchy potion 92 3600 10");
+                player.sendChatMessage("/shrunken potion 92 3600 10");
                 break;
             case 7:
                 // Boost 10%
                 // player.sendChatMessage("Boost 16%");
-                player.sendChatMessage("/twitchy potion 101 1200 10");
+                player.sendChatMessage("/shrunken potion 101 1200 10");
                 break;
             case 8:
                 // Heavy Heart 9%
                 // player.sendChatMessage("Heavy Heart 16%");
-                player.sendChatMessage("/twitchy potion 108 200 10");
+                player.sendChatMessage("/shrunken potion 108 200 10");
                 break;
             case 9:
                 // Hallucinations 10%
                 // player.sendChatMessage("Hallucinations 16%");
-                player.sendChatMessage("/twitchy potion 64 3600 10");
+                player.sendChatMessage("/shrunken potion 64 3600 10");
                 break;
             case 10:
                 // Instant Damage 3%
                 player.sendChatMessage("Oop, here comes the boom! :)");
-                player.sendChatMessage("/twitchy potion 7 200 1000");
+                player.sendChatMessage("/shrunken potion 7 200 1000");
                 break;
             default:
                 break;
@@ -206,67 +206,67 @@ public class Events {
             case 0:
                 player.sendChatMessage("A Horde of Skeletons has chased some raiders from the previous channel!");
                 for (int x = 0; x < 60; x++) {
-                    player.sendChatMessage("/twitchy Skeleton");
+                    player.sendChatMessage("/shrunken Skeleton");
                 }
                 break;
             case 1:
                 player.sendChatMessage("The arrival of Raiders seems to have stirred up a Zombie Horde!");
                 for (int x = 0; x < 150; x++) {
-                    player.sendChatMessage("/twitchy Zombie");
+                    player.sendChatMessage("/shrunken Zombie");
                 }
                 break;
             case 2:
                 player.sendChatMessage("WHO DID DAMAGE TO THE CHICKEN?!");
                 for (int x = 0; x < 300; x++) {
-                    player.sendChatMessage("/twitchy Chicken");
+                    player.sendChatMessage("/shrunken Chicken");
                 }
                 break;
             case 3:
                 player.sendChatMessage("The Raiders have brought a stampede of Cows with them!");
                 for (int x = 0; x < 300; x++) {
-                    player.sendChatMessage("/twitchy Cow");
+                    player.sendChatMessage("/shrunken Cow");
                 }
                 break;
             case 4:
                 player.sendChatMessage("The Raiders brought some Slimes with em!");
                 for (int x = 0; x < 40; x++) {
-                    player.sendChatMessage("/twitchy Slime");
+                    player.sendChatMessage("/shrunken Slime");
                 }
                 break;
             case 5:
                 player.sendChatMessage("With the arrival of raiders, an old friend has come to visit! :)");
                 for (int x = 0; x < 150; x++) {
-                    player.sendChatMessage("/twitchy DireWolf");
+                    player.sendChatMessage("/shrunken DireWolf");
                 }
                 break;
             case 6:
                 player.sendChatMessage("The sudden rush of Raiders has awoken a horde of Fallen Knights!");
                 for (int x = 0; x < 100; x++) {
-                    player.sendChatMessage("/twitchy FallenKnight");
+                    player.sendChatMessage("/shrunken FallenKnight");
                 }
                 break;
             case 7:
                 player.sendChatMessage("It seems the Raiders have brought a few golems with them!");
                 for (int x = 0; x < 50; x++) {
-                    player.sendChatMessage("/twitchy Golem");
+                    player.sendChatMessage("/shrunken Golem");
                 }
                 break;
             case 8:
                 player.sendChatMessage("Turns out the Raiders were shepherds in a past life.");
                 for (int x = 0; x < 300; x++) {
-                    player.sendChatMessage("/twitchy Sheep");
+                    player.sendChatMessage("/shrunken Sheep");
                 }
                 break;
             case 9:
                 player.sendChatMessage("With squealing in the distance, you hear them approach.... Raiders....");
                 for (int x = 0; x < 300; x++) {
-                    player.sendChatMessage("/twitchy Pig");
+                    player.sendChatMessage("/shrunken Pig");
                 }
                 break;
             case 10:
                 player.sendChatMessage("Holy smokes! The Sentries spotted the Raiders! Kill 'em quick!");
                 for (int x = 0; x < 100; x++) {
-                    player.sendChatMessage("/twitchy Sentry");
+                    player.sendChatMessage("/shrunken Sentry");
                 }
                 break;
             default:
@@ -317,7 +317,7 @@ public class Events {
 
     // TODO Delete this section
     public static void spawningtest(EntityClientPlayerMP player) {
-        player.sendChatMessage("/twitchy tffirebeetle");
+        player.sendChatMessage("/shrunken tffirebeetle");
     }
 
     public static void guiclose() {

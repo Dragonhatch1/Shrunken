@@ -1,7 +1,7 @@
-package com.xyrth.twitchy;
+package com.xyrth.shrunken;
 
-import com.xyrth.twitchy.client.KeyInputEventHandler;
-import com.xyrth.twitchy.client.Keybindings;
+import com.xyrth.shrunken.client.KeyInputEventHandler;
+import com.xyrth.shrunken.client.Keybindings;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
