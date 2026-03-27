@@ -6,7 +6,7 @@
 		"description": "Twitch integration for Xy's GTNH.",
 		"version": "${modVersion}",
 		"mcversion": "${minecraftVersion}",
-		"url": "https://github.com/Dragonhatch1/Twitchy",
+		"url": "https://github.com/Dragonhatch1/Shrunken",
 		"updateUrl": "",
 		"authorList": ["Dragonhatch1"],
 		"credits": "",
