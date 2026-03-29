@@ -1,15 +1,11 @@
 package com.xyrth.shrunken.reference;
 
 import com.xyrth.shrunken.event.GenericNpcEvent;
-import com.xyrth.shrunken.event.spawn.npc.SpawnRedeemNpc;
-import com.xyrth.shrunken.event.spawn.npc.SpawnSubNpc;
 
 // This class provides a list of event types, with properties for their description and corresponding class
 public enum CNpcEvent {
 
-    UNKNOWN("Unknown Event", GenericNpcEvent.class),
-    SUBNPC("Spawns Custom Sub NPC", SpawnSubNpc.class),
-    REDEEMNPC("Spawns Custom Redeemed NPC", SpawnRedeemNpc.class);
+    UNKNOWN("Unknown Event", GenericNpcEvent.class);
 
     public final String eventAction;
     public final Class<? extends GenericNpcEvent> genericEventClass;

@@ -1,6 +1,7 @@
 package com.xyrth.shrunken.event.potions;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
@@ -11,13 +12,12 @@ public class PotionPrinter extends GenericPotionEvent {
     public PotionPrinter(World world, int x, int y, int z, EntityLivingBase targetEntity) {
         super(world, x, y, z, targetEntity);
 
-        int id = 1;
+        for (int id = 0; id < Potion.potionTypes.length; id++) {
+            Potion potion = Potion.potionTypes[id];
 
-        while (id != 500) {
-            targetEntity.addPotionEffect(new PotionEffect(id, 100, 0));
-            System.out.println("Potion ID: " + id + " " + targetEntity.getActivePotionEffects());
-            targetEntity.clearActivePotions();
-            id++;
+            if (potion != null) {
+                System.out.println("ID: " + id + " Name: " + potion.getName());
+            }
         }
     }
 }

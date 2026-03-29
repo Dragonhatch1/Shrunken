@@ -13,7 +13,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
     modid = Reference.MOD_ID,
     version = Tags.VERSION,
     name = Reference.MOD_NAME,
-    dependencies = "required-after:TwilightForest",
+    //dependencies = "required-after:Witchery",
     acceptedMinecraftVersions = "[1.7.10]")
 public class Shrunken {
 
