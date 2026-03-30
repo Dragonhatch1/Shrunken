@@ -2,7 +2,6 @@ package com.xyrth.shrunken.event.potions;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.xyrth.shrunken.event.GenericPotionEvent;

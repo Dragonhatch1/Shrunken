@@ -1,5 +1,8 @@
 package com.xyrth.shrunken;
 
+import net.minecraftforge.common.MinecraftForge;
+
+import com.xyrth.shrunken.event.PermanentPotionHandler;
 import com.xyrth.shrunken.reference.Reference;
 
 import cpw.mods.fml.common.Mod;
@@ -13,7 +16,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
     modid = Reference.MOD_ID,
     version = Tags.VERSION,
     name = Reference.MOD_NAME,
-    //dependencies = "required-after:Witchery",
+    // dependencies = "required-after:Witchery",
     acceptedMinecraftVersions = "[1.7.10]")
 public class Shrunken {
 
@@ -34,6 +37,7 @@ public class Shrunken {
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
+        MinecraftForge.EVENT_BUS.register(new PermanentPotionHandler());
     }
 
     @Mod.EventHandler

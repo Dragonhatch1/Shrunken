@@ -10,9 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-import com.xyrth.shrunken.reference.CNpcEvent;
 import com.xyrth.shrunken.reference.PotionEvent;
-import com.xyrth.shrunken.reference.ShrunkenEvent;
 import com.xyrth.shrunken.util.LogUtil;
 
 public class EventCommand extends GenericCommand {
@@ -24,8 +22,7 @@ public class EventCommand extends GenericCommand {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "Run a shrunken event manually. Available are: " + Arrays.toString(ShrunkenEvent.values())
-            + Arrays.toString(PotionEvent.values());
+        return "Run a shrunken event manually. Available are: " + Arrays.toString(PotionEvent.values());
     }
 
     @Override
@@ -37,52 +34,8 @@ public class EventCommand extends GenericCommand {
         World world = player.worldObj;
 
         // Args is an array of strings split by the command input on spaces, and sliced after the command name
-        if (args.length == 6) {
-            // Check if the provided event type exists
-            if (ShrunkenEvent.isValidEnum(args[0].toUpperCase())) {
-                // Get the enum object of our event type
-                ShrunkenEvent event = ShrunkenEvent.valueOf(args[0].toUpperCase());
 
-                try {
-                    // Call the constructor of the instance of the generic class of ShrunkenEvent.genericEventClass
-                    // Player is EntityPlayerMP while the constructor wants EntityLivingBase,
-                    // but since PlayerMp is an instance of EntityLivingBase, it gets cast implicitly
-                    // Generally, this just starts a new event of the provided type
-                    event.genericEventClass
-                        .getDeclaredConstructor(
-                            World.class,
-                            double.class,
-                            double.class,
-                            double.class,
-                            EntityLivingBase.class,
-                            int.class,
-                            int.class,
-                            double.class,
-                            String.class,
-                            int.class)
-                        .newInstance(
-                            world,
-                            player.posX,
-                            player.posY,
-                            player.posZ,
-                            player,
-                            Integer.parseInt(args[1]),
-                            Integer.parseInt(args[2]),
-                            Double.parseDouble(args[3]),
-                            args[4],
-                            Integer.parseInt(args[5]));
-                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException
-                    | InvocationTargetException e) {
-                    sendChatToSender(sender, EnumChatFormatting.RED + "Failed to trigger event.");
-                    LogUtil.error(e);
-                    LogUtil.error(e.getMessage());
-                }
-            } else {
-                sendChatToSender(
-                    sender,
-                    String.format(EnumChatFormatting.YELLOW + "Event '%s' does not exist.", args[0]));
-            }
-        } else if (args.length == 4) {
+        if (args.length == 4) {
 
             if (PotionEvent.isValidEnum(args[0].toUpperCase())) {
 
@@ -97,45 +50,6 @@ public class EventCommand extends GenericCommand {
                             Integer.parseInt(args[2]),
                             Integer.parseInt(args[3]),
                             player);
-                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException
-                    | InvocationTargetException e) {
-                    sendChatToSender(sender, EnumChatFormatting.RED + "Failed to trigger event.");
-                    LogUtil.error(e);
-                    LogUtil.error(e.getMessage());
-                }
-            } else {
-                sendChatToSender(
-                    sender,
-                    String.format(EnumChatFormatting.YELLOW + "Event '%s' does not exist.", args[0]));
-            }
-        } else if (args.length == 5) {
-
-            if (CNpcEvent.isValidEnum(args[0].toUpperCase())) {
-
-                CNpcEvent event = CNpcEvent.valueOf(args[0].toUpperCase());
-
-                try {
-                    event.genericEventClass
-                        .getDeclaredConstructor(
-                            World.class,
-                            double.class,
-                            double.class,
-                            double.class,
-                            EntityLivingBase.class,
-                            String.class,
-                            int.class,
-                            int.class,
-                            int.class)
-                        .newInstance(
-                            world,
-                            player.posX,
-                            player.posY,
-                            player.posZ,
-                            player,
-                            args[1],
-                            Integer.parseInt(args[2]),
-                            Integer.parseInt(args[3]),
-                            Integer.parseInt(args[4]));
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException
                     | InvocationTargetException e) {
                     sendChatToSender(sender, EnumChatFormatting.RED + "Failed to trigger event.");

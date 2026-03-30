@@ -1,10 +1,5 @@
 package com.xyrth.shrunken;
 
-import com.xyrth.shrunken.client.KeyInputEventHandler;
-import com.xyrth.shrunken.client.Keybindings;
-
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 
 public class ClientProxy extends CommonProxy {
@@ -12,16 +7,5 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-
-        // We register the KeyInput event handler only on the client, since can listen to keyboard stuff
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new KeyInputEventHandler());
-
-        ClientRegistry.registerKeyBinding(Keybindings.randomspawn);
-        ClientRegistry.registerKeyBinding(Keybindings.randompotion);
-        ClientRegistry.registerKeyBinding(Keybindings.mobraid);
-        ClientRegistry.registerKeyBinding(Keybindings.substuff);
-        ClientRegistry.registerKeyBinding(Keybindings.spawningtest);
     }
 }
