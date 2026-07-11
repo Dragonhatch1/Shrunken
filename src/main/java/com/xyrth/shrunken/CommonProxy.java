@@ -1,6 +1,5 @@
 package com.xyrth.shrunken;
 
-import com.xyrth.shrunken.command.EventCommand;
 import com.xyrth.shrunken.util.Config;
 import com.xyrth.shrunken.util.LogUtil;
 
@@ -33,6 +32,5 @@ public class CommonProxy {
 
     public void serverStarting(FMLServerStartingEvent event) {
         // Register commands
-        event.registerServerCommand(new EventCommand());
     }
 }
