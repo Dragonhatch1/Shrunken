@@ -14,11 +14,6 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class BreakroomHandler {
 
-    // hardcoded Breakroom Boundaries. Will change to command later to change area
-    private static final double MIN_X = 0, MAX_X = 10;
-    private static final double MIN_Y = 0, MAX_Y = 250;
-    private static final double MIN_Z = 0, MAX_Z = 10;
-
     private final Set<UUID> playersInBreakroom = new HashSet<>();
     private final ToastHandler toastHandler = new ToastHandler();
 
@@ -72,10 +67,18 @@ public class BreakroomHandler {
     }
 
     private boolean isInBreakroom(EntityPlayer player) {
-        return player.posX >= MIN_X && player.posX <= MAX_X
-            && player.posY >= MIN_Y
-            && player.posY <= MAX_Y
-            && player.posZ >= MIN_Z
-            && player.posZ <= MAX_Z;
+        return player.posX >= BreakroomConfig.MIN_X && player.posX <= BreakroomConfig.MAX_X
+            && player.posY >= BreakroomConfig.MIN_Y
+            && player.posY <= BreakroomConfig.MAX_Y
+            && player.posZ >= BreakroomConfig.MIN_Z
+            && player.posZ <= BreakroomConfig.MAX_Z;
+    }
+
+    public static class BreakroomConfig {
+
+        public static double MIN_X = 0, MAX_X = 10;
+        public static double MIN_Y = 0, MAX_Y = 250;
+        public static double MIN_Z = 0, MAX_Z = 10;
+
     }
 }
