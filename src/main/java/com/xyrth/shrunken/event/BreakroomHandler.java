@@ -1,16 +1,16 @@
 package com.xyrth.shrunken.event;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class BreakroomHandler {
 
@@ -19,12 +19,16 @@ public class BreakroomHandler {
     private static final double MIN_Y = 0, MAX_Y = 250;
     private static final double MIN_Z = 0, MAX_Z = 10;
 
-
     private final Set<UUID> playersInBreakroom = new HashSet<>();
+    private final ToastHandler toastHandler = new ToastHandler();
 
     // Values for Time Vial
     private static final String NBT_STORED_TICK = "storedTimeTick";
     private static final int NUMBER_ERR = -846280;
+
+    public BreakroomHandler() {
+        MinecraftForge.EVENT_BUS.register(toastHandler);
+    }
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -33,26 +37,37 @@ public class BreakroomHandler {
         EntityPlayer player = event.player;
         if (player.worldObj.isRemote) return;
 
-        // match the same 20 ticks as Not-Leisure Time Vial
-        if (player.worldObj.getTotalWorldTime() % 20 != 0) return;
+        boolean inZone = isInBreakroom(player);
+        boolean wasInZone = playersInBreakroom.contains(player.getUniqueID());
 
-        if (!isInBreakroom(player)) return;
+        if (inZone && !wasInZone) {
+            player.worldObj.playSoundAtEntity(player, "shrunken:breakroom_enter", 0.1F, 1.0F);
+            toastHandler.showToast("Breakroom Entered", 100, true);
+            playersInBreakroom.add(player.getUniqueID());
+        } else if (!inZone && wasInZone) {
+            player.worldObj.playSoundAtEntity(player, "shrunken:breakroom_leave", 0.1F, 1.0F);
+            toastHandler.showToast("Breakroom Left", 100, false);
+            playersInBreakroom.remove(player.getUniqueID());
+        }
 
-        for (ItemStack stack : player.inventory.mainInventory) {
-            if (stack == null) continue;
-            if (!stack.getItem()
-                .getClass()
-                .getName()
-                .equals("com.xir.NHUtilities.common.items.timeVial.TimeVial")) continue;
+        if (inZone && player.worldObj.getTotalWorldTime() % 20 == 0) {
 
-            NBTTagCompound tag = stack.getTagCompound();
-            if (tag == null) continue;
+            for (ItemStack stack : player.inventory.mainInventory) {
+                if (stack == null) continue;
+                if (!stack.getItem()
+                    .getClass()
+                    .getName()
+                    .equals("com.xir.NHUtilities.common.items.timeVial.TimeVial")) continue;
 
-            int stored = tag.getInteger(NBT_STORED_TICK);
-            if (stored == NUMBER_ERR) continue;
+                NBTTagCompound tag = stack.getTagCompound();
+                if (tag == null) continue;
 
-            tag.setInteger(NBT_STORED_TICK, stored + 10);
-            stack.setTagCompound(tag);
+                int stored = tag.getInteger(NBT_STORED_TICK);
+                if (stored == NUMBER_ERR) continue;
+
+                tag.setInteger(NBT_STORED_TICK, stored + 10);
+                stack.setTagCompound(tag);
+            }
         }
     }
 

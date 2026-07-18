@@ -1,0 +1,14 @@
+{
+  "breakroom_enter": {
+    "category": "master",
+    "sounds": [
+      "shrunken:breakroom_enter"
+    ]
+  },
+  "breakroom_leave": {
+    "category": "master",
+    "sounds": [
+      "shrunken:breakroom_leave"
+    ]
+  }
+}
