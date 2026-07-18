@@ -8,6 +8,7 @@ import com.xyrth.shrunken.util.BreakroomConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -68,10 +69,10 @@ public class BreakroomHandler {
     }
 
     private boolean isInBreakroom(EntityPlayer player) {
-        return player.posX >= BreakroomConfig.minX && player.posX <= BreakroomConfig.maxX
-            && player.posY >= BreakroomConfig.minY
-            && player.posY <= BreakroomConfig.maxY
-            && player.posZ >= BreakroomConfig.minZ
-            && player.posZ <= BreakroomConfig.maxZ;
+        return MathHelper.floor_double(player.posX) >= BreakroomConfig.minX && MathHelper.floor_double(player.posX) <= BreakroomConfig.maxX
+            && MathHelper.floor_double(player.posY) >= BreakroomConfig.minY
+            && MathHelper.floor_double(player.posY) <= BreakroomConfig.maxY
+            && MathHelper.floor_double(player.posZ) >= BreakroomConfig.minZ
+            && MathHelper.floor_double(player.posZ) <= BreakroomConfig.maxZ;
     }
 }

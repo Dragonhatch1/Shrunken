@@ -6,9 +6,9 @@ import java.io.File;
 
 public class BreakroomConfig {
 
-    public static double minX = 0, maxX = 0;
-    public static double minY = 0, maxY = 0;
-    public static double minZ = 0, maxZ = 0;
+    public static int minX = 0, maxX = 0;
+    public static int minY = 0, maxY = 0;
+    public static int minZ = 0, maxZ = 0;
 
     private static Configuration config;
 
@@ -20,12 +20,12 @@ public class BreakroomConfig {
     public static void load(){
         config.load();
 
-        minX = config.get("breakroom", "minX", minX).getDouble();
-        maxX = config.get("breakroom", "maxX", maxX).getDouble();
-        minY = config.get("breakroom", "minY", minY).getDouble();
-        maxY = config.get("breakroom", "maxY", maxY).getDouble();
-        minZ = config.get("breakroom", "minZ", minZ).getDouble();
-        maxZ = config.get("breakroom", "maxZ", maxZ).getDouble();
+        minX = config.get("breakroom", "minX", minX).getInt();
+        maxX = config.get("breakroom", "maxX", maxX).getInt();
+        minY = config.get("breakroom", "minY", minY).getInt();
+        maxY = config.get("breakroom", "maxY", maxY).getInt();
+        minZ = config.get("breakroom", "minZ", minZ).getInt();
+        maxZ = config.get("breakroom", "maxZ", maxZ).getInt();
 
         if (config.hasChanged()) config.save();
     }

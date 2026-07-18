@@ -6,6 +6,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.MathHelper;
 
 import java.util.Arrays;
 
@@ -45,17 +46,17 @@ public class CommandBreakroom extends CommandBase {
         switch (args[0]) {
 
             case "pos1":
-                pos1[0] = player.posX;
-                pos1[1] = player.posY;
-                pos1[2] = player.posZ;
+                pos1[0] = MathHelper.floor_double(player.posX);
+                pos1[1] = MathHelper.floor_double(player.posY);
+                pos1[2] = MathHelper.floor_double(player.posZ);
                 sender.addChatMessage(new ChatComponentText("Pos1 set to " + pos1[0] + ", " + pos1[1] + ", " + pos1[2] + ", "));
                 updateBreakroomConfig();
                 break;
 
             case "pos2":
-                pos2[0] = player.posX;
-                pos2[1] = player.posY;
-                pos2[2] = player.posZ;
+                pos2[0] = MathHelper.floor_double(player.posX);
+                pos2[1] = MathHelper.floor_double(player.posY);
+                pos2[2] = MathHelper.floor_double(player.posZ);
                 sender.addChatMessage(new ChatComponentText("Pos2 set to " + pos2[0] + ", " + pos2[1] + ", " + pos2[2] + ", "));
                 updateBreakroomConfig();
                 break;
@@ -75,12 +76,12 @@ public class CommandBreakroom extends CommandBase {
 
         if (pos1 == null || pos2 == null) return;
 
-        BreakroomConfig.minX = Math.min(pos1[0], pos2[0]);
-        BreakroomConfig.maxX = Math.max(pos1[0], pos2[0]);
-        BreakroomConfig.minY = Math.min(pos1[1], pos2[1]);
-        BreakroomConfig.maxY = Math.max(pos1[1], pos2[1]);
-        BreakroomConfig.minZ = Math.min(pos1[2], pos2[2]);
-        BreakroomConfig.maxZ = Math.max(pos1[2], pos2[2]);
+        BreakroomConfig.minX = (int) Math.min(pos1[0], pos2[0]);
+        BreakroomConfig.maxX = (int) Math.max(pos1[0], pos2[0]);
+        BreakroomConfig.minY = (int) Math.min(pos1[1], pos2[1]);
+        BreakroomConfig.maxY = (int) Math.max(pos1[1], pos2[1]);
+        BreakroomConfig.minZ = (int) Math.min(pos1[2], pos2[2]);
+        BreakroomConfig.maxZ = (int) Math.max(pos1[2], pos2[2]);
         BreakroomConfig.save();
     }
 }
