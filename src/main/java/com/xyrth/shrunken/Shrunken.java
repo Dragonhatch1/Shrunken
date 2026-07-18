@@ -1,6 +1,11 @@
 package com.xyrth.shrunken;
 
+import com.xyrth.shrunken.network.PacketToast;
+import com.xyrth.shrunken.network.PacketToastHandler;
 import com.xyrth.shrunken.util.BreakroomConfig;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.xyrth.shrunken.event.BreakroomHandler;
@@ -24,6 +29,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 public class Shrunken {
 
     public static Shrunken instance;
+    public static SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
 
     @SidedProxy(clientSide = Reference.CLIENTSIDE, serverSide = Reference.SERVERSIDE)
     public static CommonProxy proxy;
@@ -45,6 +51,7 @@ public class Shrunken {
         FMLCommonHandler.instance()
             .bus()
             .register(new BreakroomHandler());
+        NETWORK.registerMessage(PacketToastHandler.class, PacketToast.class, 0, Side.CLIENT);
     }
 
     @Mod.EventHandler

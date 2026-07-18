@@ -4,8 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import com.xyrth.shrunken.Shrunken;
+import com.xyrth.shrunken.network.PacketToast;
 import com.xyrth.shrunken.util.BreakroomConfig;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -17,7 +20,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 public class BreakroomHandler {
 
     private final Set<UUID> playersInBreakroom = new HashSet<>();
-    private final ToastHandler toastHandler = new ToastHandler();
+    public static final ToastHandler toastHandler = new ToastHandler();
 
     // Values for Time Vial
     private static final String NBT_STORED_TICK = "storedTimeTick";
@@ -39,11 +42,11 @@ public class BreakroomHandler {
 
         if (inZone && !wasInZone) {
             player.worldObj.playSoundAtEntity(player, "shrunken:breakroom_enter", 0.1F, 1.0F);
-            toastHandler.showToast("Breakroom Entered", 100, true);
+            Shrunken.NETWORK.sendTo(new PacketToast("Breakroom Entered", 100, true), (EntityPlayerMP) player);
             playersInBreakroom.add(player.getUniqueID());
         } else if (!inZone && wasInZone) {
             player.worldObj.playSoundAtEntity(player, "shrunken:breakroom_leave", 0.1F, 1.0F);
-            toastHandler.showToast("Breakroom Left", 100, false);
+            Shrunken.NETWORK.sendTo(new PacketToast("Breakroom Left", 100, false), (EntityPlayerMP) player);
             playersInBreakroom.remove(player.getUniqueID());
         }
 
