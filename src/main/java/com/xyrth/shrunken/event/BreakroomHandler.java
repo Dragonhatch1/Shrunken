@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import com.xyrth.shrunken.util.BreakroomConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -67,18 +68,10 @@ public class BreakroomHandler {
     }
 
     private boolean isInBreakroom(EntityPlayer player) {
-        return player.posX >= BreakroomConfig.MIN_X && player.posX <= BreakroomConfig.MAX_X
-            && player.posY >= BreakroomConfig.MIN_Y
-            && player.posY <= BreakroomConfig.MAX_Y
-            && player.posZ >= BreakroomConfig.MIN_Z
-            && player.posZ <= BreakroomConfig.MAX_Z;
-    }
-
-    public static class BreakroomConfig {
-
-        public static double MIN_X = 0, MAX_X = 10;
-        public static double MIN_Y = 0, MAX_Y = 250;
-        public static double MIN_Z = 0, MAX_Z = 10;
-
+        return player.posX >= BreakroomConfig.minX && player.posX <= BreakroomConfig.maxX
+            && player.posY >= BreakroomConfig.minY
+            && player.posY <= BreakroomConfig.maxY
+            && player.posZ >= BreakroomConfig.minZ
+            && player.posZ <= BreakroomConfig.maxZ;
     }
 }

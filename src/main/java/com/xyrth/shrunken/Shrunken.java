@@ -1,5 +1,6 @@
 package com.xyrth.shrunken;
 
+import com.xyrth.shrunken.util.BreakroomConfig;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.xyrth.shrunken.event.BreakroomHandler;
@@ -33,6 +34,7 @@ public class Shrunken {
     public void preInit(FMLPreInitializationEvent event) {
         instance = this;
         proxy.preInit(event);
+        BreakroomConfig.init(event.getSuggestedConfigurationFile());
     }
 
     @Mod.EventHandler
