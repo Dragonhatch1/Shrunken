@@ -2,9 +2,11 @@ package com.xyrth.shrunken;
 
 import net.minecraftforge.common.MinecraftForge;
 
+import com.xyrth.shrunken.event.BreakroomHandler;
 import com.xyrth.shrunken.event.PermanentPotionHandler;
 import com.xyrth.shrunken.reference.Reference;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -38,6 +40,9 @@ public class Shrunken {
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         MinecraftForge.EVENT_BUS.register(new PermanentPotionHandler());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new BreakroomHandler());
     }
 
     @Mod.EventHandler
