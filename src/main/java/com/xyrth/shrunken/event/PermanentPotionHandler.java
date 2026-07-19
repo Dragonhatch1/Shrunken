@@ -26,11 +26,11 @@ public class PermanentPotionHandler {
         if (player.worldObj.isRemote) return;
 
         // Reapply when effect is missing or about to expire (< 10 ticks)
-        PotionEffect current = player.getActivePotionEffect(Potion.potionTypes[55]);
+        PotionEffect current = player.getActivePotionEffect(Potion.potionTypes[77]);
         if (current == null || current.getDuration() < 10) {
             player.addPotionEffect(
                 new PotionEffect(
-                    55, // Effect ID
+                    77, // Effect ID | 55 in Dev for Resize, 77 in GTNH
                     72000, // Duration in ticks (10 seconds)
                     0, // Amplifier (0 = level I)
                     true // isAmbient (false = show particles)

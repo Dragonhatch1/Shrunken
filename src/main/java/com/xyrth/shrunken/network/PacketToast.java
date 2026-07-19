@@ -10,9 +10,9 @@ public class PacketToast implements IMessage {
     public int durationTicks;
     public boolean zone;
 
-    public PacketToast() {} //required no-arg constructor
+    public PacketToast() {} // required no-arg constructor
 
-    public PacketToast(String message, int durationTicks, boolean zone){
+    public PacketToast(String message, int durationTicks, boolean zone) {
         this.message = message;
         this.durationTicks = durationTicks;
         this.zone = zone;
@@ -26,7 +26,7 @@ public class PacketToast implements IMessage {
     }
 
     @Override
-    public void fromBytes(ByteBuf buf){
+    public void fromBytes(ByteBuf buf) {
         message = ByteBufUtils.readUTF8String(buf);
         durationTicks = buf.readInt();
         zone = buf.readBoolean();

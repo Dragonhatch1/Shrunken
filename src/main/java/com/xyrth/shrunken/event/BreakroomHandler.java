@@ -4,15 +4,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.xyrth.shrunken.Shrunken;
-import com.xyrth.shrunken.network.PacketToast;
-import com.xyrth.shrunken.util.BreakroomConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
+
+import com.xyrth.shrunken.Shrunken;
+import com.xyrth.shrunken.network.PacketToast;
+import com.xyrth.shrunken.util.BreakroomConfig;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -72,7 +73,8 @@ public class BreakroomHandler {
     }
 
     private boolean isInBreakroom(EntityPlayer player) {
-        return MathHelper.floor_double(player.posX) >= BreakroomConfig.minX && MathHelper.floor_double(player.posX) <= BreakroomConfig.maxX
+        return MathHelper.floor_double(player.posX) >= BreakroomConfig.minX
+            && MathHelper.floor_double(player.posX) <= BreakroomConfig.maxX
             && MathHelper.floor_double(player.posY) >= BreakroomConfig.minY
             && MathHelper.floor_double(player.posY) <= BreakroomConfig.maxY
             && MathHelper.floor_double(player.posZ) >= BreakroomConfig.minZ
