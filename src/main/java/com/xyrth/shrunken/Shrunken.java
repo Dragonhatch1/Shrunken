@@ -1,5 +1,6 @@
 package com.xyrth.shrunken;
 
+import com.xyrth.shrunken.client.PlayerSizeHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.xyrth.shrunken.event.BreakroomHandler;
@@ -52,6 +53,9 @@ public class Shrunken {
             .bus()
             .register(new BreakroomHandler());
         NETWORK.registerMessage(PacketToastHandler.class, PacketToast.class, 0, Side.CLIENT);
+        PlayerSizeHandler playerSize = new PlayerSizeHandler();
+        MinecraftForge.EVENT_BUS.register(playerSize);
+        FMLCommonHandler.instance().bus().register(playerSize);
     }
 
     @Mod.EventHandler
