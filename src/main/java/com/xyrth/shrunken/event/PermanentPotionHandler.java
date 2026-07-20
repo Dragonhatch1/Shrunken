@@ -1,8 +1,6 @@
 package com.xyrth.shrunken.event;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
@@ -26,16 +24,16 @@ public class PermanentPotionHandler {
         if (player.worldObj.isRemote) return;
 
         // Reapply when effect is missing or about to expire (< 10 ticks) Remove when Camera Fixed
-//        PotionEffect current = player.getActivePotionEffect(Potion.potionTypes[77]);
-//        if (current == null || current.getDuration() < 10) {
-//            player.addPotionEffect(
-//                new PotionEffect(
-//                    77, // Effect ID | 55 in Dev for Resize, 77 in GTNH
-//                    72000, // Duration in ticks (10 seconds)
-//                    0, // Amplifier (0 = level I)
-//                    true // isAmbient (false = show particles)
-//                ));
-//        }
+        // PotionEffect current = player.getActivePotionEffect(Potion.potionTypes[77]);
+        // if (current == null || current.getDuration() < 10) {
+        // player.addPotionEffect(
+        // new PotionEffect(
+        // 77, // Effect ID | 55 in Dev for Resize, 77 in GTNH
+        // 72000, // Duration in ticks (10 seconds)
+        // 0, // Amplifier (0 = level I)
+        // true // isAmbient (false = show particles)
+        // ));
+        // }
         if (player.stepHeight < 0.2F) {
             player.stepHeight = 0.2F;
             Witchery.packetPipeline.sendToAll((IMessage) (new PacketSyncEntitySize(player)));
