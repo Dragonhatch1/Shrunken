@@ -8,25 +8,25 @@ public class ShrunkenEntityRenderer extends EntityRenderer {
     private final Minecraft mc;
     private float offsetY;
 
-    public ShrunkenEntityRenderer(Minecraft mc){
+    public ShrunkenEntityRenderer(Minecraft mc) {
         super(mc, mc.getResourceManager());
         this.mc = mc;
     }
 
-    public void setOffset(float offset){
+    public void setOffset(float offset) {
         this.offsetY = offset;
     }
 
-    public float getOffset(){
+    public float getOffset() {
         return this.offsetY;
     }
 
-    private boolean canShiftView(){
+    private boolean canShiftView() {
         return this.mc.thePlayer != null && !this.mc.thePlayer.isPlayerSleeping() && !this.mc.thePlayer.isRiding();
     }
 
     @Override
-    public void updateCameraAndRender(float partialTicks){
+    public void updateCameraAndRender(float partialTicks) {
         if (this.canShiftView()) {
             this.mc.thePlayer.posY -= this.offsetY;
             this.mc.thePlayer.lastTickPosY -= this.offsetY;

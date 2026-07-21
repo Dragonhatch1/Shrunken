@@ -1,26 +1,27 @@
 package com.xyrth.shrunken.client;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.event.RenderLivingEvent.Post;
 import net.minecraftforge.client.event.RenderLivingEvent.Pre;
-
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class PlayerSizeHandler {
@@ -33,7 +34,6 @@ public class PlayerSizeHandler {
     private static float defaultHeight = 1.8F;
     private static float scaledStepHeight = 0.5F * scale;
 
-
     @SubscribeEvent
     public void onLivingRender(Pre event) {
         if (!(event.entity instanceof EntityPlayer)) return;
@@ -45,8 +45,7 @@ public class PlayerSizeHandler {
             MathHelper.floor_double(player.posX),
             MathHelper.floor_double(trueY),
             MathHelper.floor_double(player.posZ),
-            0
-        );
+            0);
         int lightmapX = light % 65536;
         int lightmapY = light / 65536;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) lightmapX, (float) lightmapY);
@@ -77,14 +76,20 @@ public class PlayerSizeHandler {
 
         methodSetPlayerSize.invoke(player, (defaultWidth * scale), (defaultHeight * scale));
 
-        if (player.stepHeight != scaledStepHeight){
+        if (player.stepHeight != scaledStepHeight) {
             player.stepHeight = scaledStepHeight;
         }
 
-        //TODO Player Walking Speed
+        //TODO Change Player Movement speed if scale>2
+    }
 
-        //TODO Player Jump
+    @SubscribeEvent
+    public void onLivingJump(LivingJumpEvent event){
+        if (!(event.entity instanceof EntityPlayer)) return;
 
+        float scale = ShrunkenState.getScale();
+        double jumpMultiplier = Math.min(Math.max((double)scale, 0.5D) * 1.5D, 2.0);
+        event.entityLiving.motionY *= jumpMultiplier;
     }
 
     @SubscribeEvent
@@ -99,26 +104,25 @@ public class PlayerSizeHandler {
         renderer.setOffset(offset);
         mc.entityRenderer = renderer;
 
-
         rendererSwapped = true;
     }
 
     @SubscribeEvent
-    public void onLivingHurt(LivingHurtEvent event){
+    public void onLivingHurt(LivingHurtEvent event) {
         if (!(event.entity instanceof EntityPlayer)) return;
         if (!"inWall".equals(event.source.getDamageType())) return;
 
-        if (ShrunkenState.getScale() < 1.0F){
+        if (ShrunkenState.getScale() < 1.0F) {
             event.setCanceled(true);
         }
     }
 
     @SubscribeEvent
-    public void onLivingAttack(LivingAttackEvent event){
+    public void onLivingAttack(LivingAttackEvent event) {
         if (!(event.entity instanceof EntityPlayer)) return;
         if (!"inWall".equals(event.source.getDamageType())) return;
 
-        if (ShrunkenState.getScale() < 1.0F){
+        if (ShrunkenState.getScale() < 1.0F) {
             event.setCanceled(true);
         }
     }

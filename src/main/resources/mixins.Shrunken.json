@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8.5-GTNH",
+  "target": "@env(DEFAULT)",
+  "package": "com.xyrth.shrunken.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": [
+    "MixinEntityRenderer"
+  ],
+  "server": [],
+  "refmap": "mixins.Shrunken.refmap.json"
+}
