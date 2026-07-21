@@ -51,10 +51,10 @@ public class Shrunken {
             .register(new BreakroomHandler());
         NETWORK.registerMessage(PacketToastHandler.class, PacketToast.class, 0, Side.CLIENT);
         PlayerSizeHandler playerSize = new PlayerSizeHandler();
-        MinecraftForge.EVENT_BUS.register(playerSize);
         FMLCommonHandler.instance()
             .bus()
             .register(playerSize);
+        MinecraftForge.EVENT_BUS.register(playerSize);
     }
 
     @Mod.EventHandler
@@ -69,3 +69,7 @@ public class Shrunken {
         proxy.serverStarting(event);
     }
 }
+
+// TODO Fix Boat Placement
+// TODO Fix Minecart Placement
+// TODO Fix Sitting Position so we can sit in Breakroom
