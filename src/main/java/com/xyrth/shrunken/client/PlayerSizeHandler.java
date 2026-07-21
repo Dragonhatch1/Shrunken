@@ -39,7 +39,10 @@ public class PlayerSizeHandler {
         if (!(event.entity instanceof EntityPlayer)) return;
 
         EntityPlayer player = (EntityPlayer) event.entity;
-
+        // TODO Fix Boat Placement
+        // TODO Fix Minecart Placement
+        // TODO Fix Sitting Position so we can sit in Breakroom
+        // Forces light to be calculated based off of our True Y Position with offset.
         double trueY = player.posY + offset;
         int light = player.worldObj.getLightBrightnessForSkyBlocks(
             MathHelper.floor_double(player.posX),
@@ -76,17 +79,26 @@ public class PlayerSizeHandler {
 
         methodSetPlayerSize.invoke(player, (defaultWidth * scale), (defaultHeight * scale));
 
+        //Change stepHeight if its not the scaled step height
         if (player.stepHeight != scaledStepHeight) {
             player.stepHeight = scaledStepHeight;
         }
 
-        //TODO Change Player Movement speed if scale>2
+        //Change Player Speed if Scale is above 1
+        if (!player.worldObj.isRemote) {
+            if (scale > 1.0F) {
+                IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+                double vanillaSpeed = 0.1D;
+                speedAttribute.setBaseValue(Math.min((double) vanillaSpeed * scale, 3.0D));
+            }
+        }
     }
 
     @SubscribeEvent
     public void onLivingJump(LivingJumpEvent event){
         if (!(event.entity instanceof EntityPlayer)) return;
 
+        //change jump distance based on scale with a bottom of 0.5D and top of 2.0D
         float scale = ShrunkenState.getScale();
         double jumpMultiplier = Math.min(Math.max((double)scale, 0.5D) * 1.5D, 2.0);
         event.entityLiving.motionY *= jumpMultiplier;
@@ -100,6 +112,7 @@ public class PlayerSizeHandler {
         Minecraft mc = Minecraft.getMinecraft();
         if (mc.thePlayer == null) return;
 
+        // hooks into our custom camera and Y Offsets
         ShrunkenEntityRenderer renderer = new ShrunkenEntityRenderer(mc);
         renderer.setOffset(offset);
         mc.entityRenderer = renderer;
@@ -112,6 +125,7 @@ public class PlayerSizeHandler {
         if (!(event.entity instanceof EntityPlayer)) return;
         if (!"inWall".equals(event.source.getDamageType())) return;
 
+        // ignores damage from any source that is labeled "inWall"
         if (ShrunkenState.getScale() < 1.0F) {
             event.setCanceled(true);
         }
@@ -122,6 +136,7 @@ public class PlayerSizeHandler {
         if (!(event.entity instanceof EntityPlayer)) return;
         if (!"inWall".equals(event.source.getDamageType())) return;
 
+        //Ignores the attack event if source is labeled "inWall"
         if (ShrunkenState.getScale() < 1.0F) {
             event.setCanceled(true);
         }
