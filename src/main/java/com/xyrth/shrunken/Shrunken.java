@@ -4,7 +4,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.xyrth.shrunken.client.PlayerSizeHandler;
 import com.xyrth.shrunken.event.BreakroomHandler;
-import com.xyrth.shrunken.event.PermanentPotionHandler;
 import com.xyrth.shrunken.network.PacketToast;
 import com.xyrth.shrunken.network.PacketToastHandler;
 import com.xyrth.shrunken.reference.Reference;
@@ -25,7 +24,6 @@ import cpw.mods.fml.relauncher.Side;
     modid = Reference.MOD_ID,
     version = Tags.VERSION,
     name = Reference.MOD_NAME,
-    // dependencies = "required-after:Witchery",
     acceptedMinecraftVersions = "[1.7.10]")
 public class Shrunken {
 
@@ -48,7 +46,6 @@ public class Shrunken {
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        MinecraftForge.EVENT_BUS.register(new PermanentPotionHandler());
         FMLCommonHandler.instance()
             .bus()
             .register(new BreakroomHandler());
