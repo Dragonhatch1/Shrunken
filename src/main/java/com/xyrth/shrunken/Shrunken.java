@@ -4,6 +4,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.xyrth.shrunken.client.PlayerSizeHandler;
 import com.xyrth.shrunken.event.BreakroomHandler;
+import com.xyrth.shrunken.network.PacketSyncPlayerSize;
+import com.xyrth.shrunken.network.PacketSyncPlayerSizeHandler;
 import com.xyrth.shrunken.network.PacketToast;
 import com.xyrth.shrunken.network.PacketToastHandler;
 import com.xyrth.shrunken.reference.Reference;
@@ -50,6 +52,7 @@ public class Shrunken {
             .bus()
             .register(new BreakroomHandler());
         NETWORK.registerMessage(PacketToastHandler.class, PacketToast.class, 0, Side.CLIENT);
+        NETWORK.registerMessage(PacketSyncPlayerSizeHandler.class, PacketSyncPlayerSize.class, 1, Side.CLIENT);
         PlayerSizeHandler playerSize = new PlayerSizeHandler();
         FMLCommonHandler.instance()
             .bus()
@@ -73,3 +76,4 @@ public class Shrunken {
 // TODO Fix Boat Placement
 // TODO Fix Minecart Placement
 // TODO Fix Sitting Position so we can sit in Breakroom
+// TODO Fix Player Display in inventory

@@ -1,16 +1,13 @@
 package com.xyrth.shrunken;
 
-import com.xyrth.shrunken.client.PlayerSizeHandler;
 import com.xyrth.shrunken.command.CommandBreakroom;
 import com.xyrth.shrunken.util.Config;
 import com.xyrth.shrunken.util.LogUtil;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy {
 

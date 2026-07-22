@@ -4,7 +4,9 @@
   "target": "@env(DEFAULT)",
   "package": "com.xyrth.shrunken.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "mixins": [
+    "MixinEntity"
+  ],
   "client": [
     "MixinEntityRenderer"
   ],
