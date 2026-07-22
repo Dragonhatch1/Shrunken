@@ -16,6 +16,7 @@ public class PlayerRenderHandler {
     private static float scale = ShrunkenState.getScale();
     private static float offset = ShrunkenState.getEyeOffset();
     private static boolean rendererSwapped = false;
+    private static int lastThirdPersonView = -1;
 
     @SubscribeEvent
     public void onLivingRender(RenderLivingEvent.Pre event) {

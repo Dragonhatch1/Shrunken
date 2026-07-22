@@ -8,7 +8,8 @@
     "MixinEntity"
   ],
   "client": [
-    "MixinEntityRenderer"
+    "MixinEntityRenderer",
+    "MixinMinecraft"
   ],
   "server": [],
   "refmap": "mixins.Shrunken.refmap.json"
