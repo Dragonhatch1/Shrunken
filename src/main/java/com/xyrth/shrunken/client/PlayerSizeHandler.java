@@ -72,10 +72,21 @@ public class PlayerSizeHandler {
     @SubscribeEvent
     public void onLivingHurt(LivingHurtEvent event) {
         if (!(event.entity instanceof EntityPlayer)) return;
-        if (!"inWall".equals(event.source.getDamageType())) return;
+        EntityPlayer player = (EntityPlayer) event.entity;
 
-        // ignores damage from any source that is labeled "inWall"
-        if (ShrunkenState.getScale() < 1.0F) {
+        Entity ride = player.ridingEntity;
+        boolean isBoat = (ride != null && ride.getClass()
+            .getSimpleName()
+            .toLowerCase()
+            .contains("boat"));
+
+        // ignores drowning damage if in boat
+        if ("drown".equals(event.source.getDamageType()) && isBoat) {
+            event.setCanceled(true);
+        }
+
+        // ignores inWall suffocation damage when scale is < 1.0F
+        if ("inWall".equals(event.source.getDamageType()) && ShrunkenState.getScale() < 1.0F) {
             event.setCanceled(true);
         }
     }
@@ -83,10 +94,21 @@ public class PlayerSizeHandler {
     @SubscribeEvent
     public void onLivingAttack(LivingAttackEvent event) {
         if (!(event.entity instanceof EntityPlayer)) return;
-        if (!"inWall".equals(event.source.getDamageType())) return;
+        EntityPlayer player = (EntityPlayer) event.entity;
 
-        // Ignores the attack event if source is labeled "inWall"
-        if (ShrunkenState.getScale() < 1.0F) {
+        Entity ride = player.ridingEntity;
+        boolean isBoat = (ride != null && ride.getClass()
+            .getSimpleName()
+            .toLowerCase()
+            .contains("boat"));
+
+        // ignores drowning attack if in boat
+        if ("drown".equals(event.source.getDamageType()) && isBoat) {
+            event.setCanceled(true);
+        }
+
+        // ignores inWall suffocation attack when scale is < 1.0F
+        if ("inWall".equals(event.source.getDamageType()) && ShrunkenState.getScale() < 1.0F) {
             event.setCanceled(true);
         }
     }

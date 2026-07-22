@@ -73,8 +73,6 @@ public class Shrunken {
     }
 }
 
-// TODO Fix Boat Placement
-// TODO Fix Minecart Placement
 // TODO Fix Sitting Position so we can sit in Breakroom
 // TODO Fix Player Display in inventory
 // TODO Fix WAILA up by 1 block

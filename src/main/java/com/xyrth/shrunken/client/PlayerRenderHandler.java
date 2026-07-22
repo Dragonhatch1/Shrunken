@@ -2,6 +2,10 @@ package com.xyrth.shrunken.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -16,13 +20,13 @@ public class PlayerRenderHandler {
     private static float scale = ShrunkenState.getScale();
     private static float offset = ShrunkenState.getEyeOffset();
     private static boolean rendererSwapped = false;
-    private static int lastThirdPersonView = -1;
 
     @SubscribeEvent
     public void onLivingRender(RenderLivingEvent.Pre event) {
         if (!(event.entity instanceof EntityPlayer)) return;
 
         EntityPlayer player = (EntityPlayer) event.entity;
+        float verticalOffset = getRidingOffset(player);
 
         // Forces light to be calculated based off of our True Y Position with offset.
         double trueY = player.posY + offset;
@@ -36,7 +40,9 @@ public class PlayerRenderHandler {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) lightmapX, (float) lightmapY);
 
         GL11.glPushMatrix();
-        GL11.glTranslated(0.0, offset, 0.0);
+        if (verticalOffset != 0.0F) {
+            GL11.glTranslated(0.0, verticalOffset, 0.0);
+        }
         GL11.glTranslated(event.x, event.y, event.z);
         GL11.glScalef(scale, scale, scale);
         GL11.glTranslated(-event.x, -event.y, -event.z);
@@ -62,5 +68,31 @@ public class PlayerRenderHandler {
         mc.entityRenderer = renderer;
 
         rendererSwapped = true;
+    }
+
+    private float getRidingOffset(EntityPlayer player) {
+        Entity ride = player.ridingEntity;
+
+        if (ride == null) {
+            return player.isPlayerSleeping() ? 0.0F : offset;
+        }
+        //TODO Change to (ride != null) if testing goes fine. this many calls is stupid. looking for specific use
+        // cases, but 0.5F seems to be nice.
+        if (ride instanceof EntityBoat) {
+            return 0.5F;
+        }
+        if (ride.getClass()
+            .getSimpleName()
+            .toLowerCase()
+            .contains("boat")) {
+            return 0.5F;
+        }
+        if (ride instanceof EntityMinecart) {
+            return 0.5F;
+        }
+        if (ride instanceof EntityHorse) {
+            return 0.5F;
+        }
+        return 0.0F;
     }
 }
