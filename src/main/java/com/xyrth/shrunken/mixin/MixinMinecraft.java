@@ -12,6 +12,7 @@ import com.xyrth.shrunken.client.ShrunkenState;
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
 
+    // Fixes 3rd person camera being forced into 1st person when block is above players head | Y+1
     @Redirect(
         method = "runGameLoop",
         at = @At(

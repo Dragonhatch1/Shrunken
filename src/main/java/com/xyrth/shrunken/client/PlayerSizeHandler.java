@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -35,17 +36,14 @@ public class PlayerSizeHandler {
                 if (methodSetPlayerSize == null) {
                     methodSetPlayerSize = ReflectionHelper.findMethod(
                         Entity.class,
-                        event.entity,
-                        new String[] { "setSize", "func_70105_a", "a" },
-                        new Class[] { Float.TYPE, Float.TYPE });
+                        player,
+                        new String[]{"setSize", "func_70105_a", "a"},
+                        new Class[]{Float.TYPE, Float.TYPE});
                 }
 
-                if (!player.worldObj.isRemote) {
-                    player.eyeHeight = scaledHeight * 0.9F;
-                }
-
+                player.eyeHeight = scaledHeight * 0.9F;
                 player.stepHeight = scaledStepHeight;
-                methodSetPlayerSize.invoke(event.entity, (scaledWidth), (scaledHeight));
+                methodSetPlayerSize.invoke(player, (scaledWidth), (scaledHeight));
             }
         }
 

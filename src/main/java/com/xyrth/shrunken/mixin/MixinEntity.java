@@ -13,6 +13,8 @@ import com.xyrth.shrunken.client.ShrunkenState;
 @Mixin(Entity.class)
 public class MixinEntity {
 
+    // Was having issues when using setSize in PlayerSizeHandler that made me surface on all blocks of water, even underwater.
+    // This fixed it by shrinking the bounding box in proportion to my scale.
     @Redirect(
         method = "handleWaterMovement",
         at = @At(

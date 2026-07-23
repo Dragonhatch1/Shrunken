@@ -1,5 +1,6 @@
 package com.xyrth.shrunken.client;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
@@ -30,11 +31,19 @@ public class PlayerRenderHandler {
 
         // Forces light to be calculated based off of our True Y Position with offset.
         double trueY = player.posY + offset;
-        int light = player.worldObj.getLightBrightnessForSkyBlocks(
-            MathHelper.floor_double(player.posX),
-            MathHelper.floor_double(trueY),
-            MathHelper.floor_double(player.posZ),
-            0);
+        int sampleY = MathHelper.floor_double(trueY);
+        int blockX = MathHelper.floor_double(player.posX);
+        int blockZ = MathHelper.floor_double(player.posZ);
+        int light;
+
+        Block sampleBlock = player.worldObj.getBlock(blockX, sampleY, blockZ);
+
+        if (sampleBlock.isOpaqueCube()){
+            light = player.worldObj.getLightBrightnessForSkyBlocks(blockX, MathHelper.floor_double(player.posY), blockZ, 0);
+        } else {
+            light = player.worldObj.getLightBrightnessForSkyBlocks(blockX, sampleY, blockZ, 0);
+        }
+
         int lightmapX = light % 65536;
         int lightmapY = light / 65536;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) lightmapX, (float) lightmapY);
