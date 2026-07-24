@@ -2,6 +2,8 @@ package com.xyrth.shrunken.client;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
@@ -22,39 +24,48 @@ public class PlayerRenderHandler {
     private static float offset = ShrunkenState.getEyeOffset();
     private static boolean rendererSwapped = false;
 
+
     @SubscribeEvent
     public void onLivingRender(RenderLivingEvent.Pre event) {
         if (!(event.entity instanceof EntityPlayer)) return;
 
         EntityPlayer player = (EntityPlayer) event.entity;
-        float verticalOffset = getRidingOffset(player);
+        Minecraft mc = Minecraft.getMinecraft();
+
 
         // Forces light to be calculated based off of our True Y Position with offset.
+        // if block is immediately above us, use regular posY instead.
         double trueY = player.posY + offset;
         int sampleY = MathHelper.floor_double(trueY);
         int blockX = MathHelper.floor_double(player.posX);
         int blockZ = MathHelper.floor_double(player.posZ);
         int light;
+        boolean isInventoryPreview = mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiContainerCreative;
 
         Block sampleBlock = player.worldObj.getBlock(blockX, sampleY, blockZ);
 
-        if (sampleBlock.isOpaqueCube()){
-            light = player.worldObj.getLightBrightnessForSkyBlocks(blockX, MathHelper.floor_double(player.posY), blockZ, 0);
-        } else {
-            light = player.worldObj.getLightBrightnessForSkyBlocks(blockX, sampleY, blockZ, 0);
-        }
+        if (!isInventoryPreview) {
+            if (sampleBlock.isOpaqueCube()) {
+                light = player.worldObj.getLightBrightnessForSkyBlocks(blockX, MathHelper.floor_double(player.posY), blockZ, 0);
+            } else {
+                light = player.worldObj.getLightBrightnessForSkyBlocks(blockX, sampleY, blockZ, 0);
+            }
 
-        int lightmapX = light % 65536;
-        int lightmapY = light / 65536;
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) lightmapX, (float) lightmapY);
+            int lightmapX = light % 65536;
+            int lightmapY = light / 65536;
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) lightmapX, (float) lightmapY);
 
-        GL11.glPushMatrix();
-        if (verticalOffset != 0.0F) {
-            GL11.glTranslated(0.0, verticalOffset, 0.0);
+            //adjust y-offset based on what im riding to account for vehicles
+            float verticalOffset = getRidingOffset(player);
+
+            GL11.glPushMatrix();
+            if (verticalOffset != 0.0F) {
+                GL11.glTranslated(0.0, verticalOffset, 0.0);
+            }
+            GL11.glTranslated(event.x, event.y, event.z);
+            GL11.glScalef(scale, scale, scale);
+            GL11.glTranslated(-event.x, -event.y, -event.z);
         }
-        GL11.glTranslated(event.x, event.y, event.z);
-        GL11.glScalef(scale, scale, scale);
-        GL11.glTranslated(-event.x, -event.y, -event.z);
     }
 
     @SubscribeEvent
