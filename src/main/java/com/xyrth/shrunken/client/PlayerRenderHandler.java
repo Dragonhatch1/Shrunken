@@ -44,6 +44,7 @@ public class PlayerRenderHandler {
 
         Block sampleBlock = player.worldObj.getBlock(blockX, sampleY, blockZ);
 
+        GL11.glPushMatrix();
         if (!isInventoryPreview) {
             if (sampleBlock.isOpaqueCube()) {
                 light = player.worldObj.getLightBrightnessForSkyBlocks(blockX, MathHelper.floor_double(player.posY), blockZ, 0);
@@ -55,10 +56,11 @@ public class PlayerRenderHandler {
             int lightmapY = light / 65536;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) lightmapX, (float) lightmapY);
 
+
             //adjust y-offset based on what im riding to account for vehicles
             float verticalOffset = getRidingOffset(player);
 
-            GL11.glPushMatrix();
+
             if (verticalOffset != 0.0F) {
                 GL11.glTranslated(0.0, verticalOffset, 0.0);
             }
@@ -105,6 +107,11 @@ public class PlayerRenderHandler {
             .getSimpleName()
             .toLowerCase()
             .contains("boat")) {
+            return 0.5F;
+        }
+        if (ride.getClass()
+            .getSimpleName()
+            .equalsIgnoreCase("EntitySit")) {
             return 0.5F;
         }
         if (ride instanceof EntityMinecart) {

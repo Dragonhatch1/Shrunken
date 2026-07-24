@@ -73,5 +73,4 @@ public class Shrunken {
     }
 }
 
-// TODO Fix Sitting Position so we can sit in Breakroom
 // TODO Fix WAILA up by 1 block
