@@ -76,27 +76,27 @@ public class PlayerRenderHandler {
         GL11.glPopMatrix();
     }
 
-    @SubscribeEvent
-    public void onRenderTick(TickEvent.RenderTickEvent event) {
-        if (event.phase != TickEvent.Phase.START) return;
-        if (rendererSwapped) return;
-
-        Minecraft mc = Minecraft.getMinecraft();
-        if (mc.thePlayer == null) return;
-
-        // hooks into our custom camera and Y Offsets
-        ShrunkenEntityRenderer renderer = new ShrunkenEntityRenderer(mc);
-        renderer.setOffset(offset);
-        mc.entityRenderer = renderer;
-
-        rendererSwapped = true;
-    }
+//    @SubscribeEvent
+//    public void onRenderTick(TickEvent.RenderTickEvent event) {
+//        if (event.phase != TickEvent.Phase.START) return;
+//        if (rendererSwapped) return;
+//
+//        Minecraft mc = Minecraft.getMinecraft();
+//        if (mc.thePlayer == null) return;
+//
+//        // hooks into our custom camera and Y Offsets
+////        ShrunkenEntityRenderer renderer = new ShrunkenEntityRenderer(mc);
+////        renderer.setOffset(offset);
+////        mc.entityRenderer = renderer;
+//
+//        rendererSwapped = true;
+//    }
 
     private float getRidingOffset(EntityPlayer player) {
         Entity ride = player.ridingEntity;
 
         if (ride == null) {
-            return player.isPlayerSleeping() ? 0.0F : offset;
+            return 0.0F;
         }
         //TODO Change to (ride != null) if testing goes fine. this many calls is stupid. looking for specific use
         // cases, but 0.5F seems to be nice.

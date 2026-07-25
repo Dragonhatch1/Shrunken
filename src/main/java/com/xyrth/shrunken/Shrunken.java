@@ -73,4 +73,9 @@ public class Shrunken {
     }
 }
 
-// TODO Fix WAILA up by 1 block
+// TODO Go over Seating Offsets. Do we need them?
+// TODO Mixins, Do we need them?
+// TODO Test on Server environment
+// TODO Clean up Rendering Handler
+// TODO Clean up PlayerSizeHandler
+// TODO Move Scale to Config

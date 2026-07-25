@@ -47,6 +47,12 @@ public class PlayerSizeHandler {
                 methodSetPlayerSize.invoke(player, (scaledWidth), (scaledHeight));
             }
         }
+        if (player.worldObj.isRemote){
+        OffsetContents contents = OffsetContents.get(player);
+        if (contents != null){
+            contents.targetOffset = 1.8F * (1.0F - ShrunkenState.getScale());
+        }
+        }
 
         // Change Player Speed if Scale is above 1
         if (!player.worldObj.isRemote) {
