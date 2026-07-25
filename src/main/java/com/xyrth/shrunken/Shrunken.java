@@ -79,3 +79,5 @@ public class Shrunken {
 // TODO Clean up Rendering Handler
 // TODO Clean up PlayerSizeHandler
 // TODO Move Scale to Config
+// TODO Arm Length if Scale above a certain Threshold
+// TODO Change Crouch to lower you more when huge
