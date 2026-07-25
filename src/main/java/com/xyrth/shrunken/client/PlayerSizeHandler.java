@@ -3,6 +3,7 @@ package com.xyrth.shrunken.client;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import alkalus.main.mixins.hooks.EntitySizeManager.OffsetContents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
