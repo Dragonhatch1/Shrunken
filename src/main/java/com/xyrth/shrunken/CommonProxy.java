@@ -16,10 +16,6 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
 
-        // Initializing the network wrapper
-        // SimpleNetworkWrapper networkRegistry = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
-        // networkRegistry.registerMessage(ShrunkenPacketHandler.class, ShrunkenPacket.class, 0, Side.SERVER);
-
         LogUtil.info("Shrunken is running at " + Tags.VERSION);
     }
 

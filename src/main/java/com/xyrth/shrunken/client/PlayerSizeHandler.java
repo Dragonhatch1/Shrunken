@@ -35,9 +35,11 @@ public class PlayerSizeHandler {
         float scaledStepHeight = 0.5F * scale; // default step height is 0.5F
         float scaledHeight = 1.8F * scale; // default height is 1.8F
         float scaledWidth = 0.6F * scale; // default width is 0.6F
+        boolean SERVER = !player.worldObj.isRemote;
+        boolean CLIENT = player.worldObj.isRemote;
 
-        // Sets player size, eye height, and step height
-        if (player.worldObj.isRemote || player.ticksExisted % 20 == 0) {
+        // Sets Player Size & Step Height on Client | Sets Player Size, Step Height, & Eye Height on Server
+        if (CLIENT || player.ticksExisted % 20 == 0) {
             float currentHeight = player.height;
             if (scaledHeight != currentHeight) {
                 if (methodSetPlayerSize == null) {
@@ -47,14 +49,17 @@ public class PlayerSizeHandler {
                         new String[] { "setSize", "func_70105_a", "a" },
                         new Class[] { Float.TYPE, Float.TYPE });
                 }
-                player.eyeHeight = scaledHeight * 0.92F;
+
                 player.stepHeight = scaledStepHeight;
                 methodSetPlayerSize.invoke(player, (scaledWidth), (scaledHeight));
+                if (SERVER) {
+                    player.eyeHeight = scaledHeight * 0.92F;
+                }
             }
         }
 
         // Sets our Y-Offset using Witchery Extras Mixin
-        if (player.worldObj.isRemote) {
+        if (CLIENT) {
             OffsetContents contents = OffsetContents.get(player);
             if (contents != null) {
                 contents.targetOffset = 1.8F * (1.0F - scale);
@@ -62,7 +67,7 @@ public class PlayerSizeHandler {
         }
 
         // Change Player Speed if Scale is above 1
-        if (!player.worldObj.isRemote) {
+        if (SERVER) {
             if (scale > 1.0F) {
                 IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
                 double vanillaSpeed = 0.1D;
