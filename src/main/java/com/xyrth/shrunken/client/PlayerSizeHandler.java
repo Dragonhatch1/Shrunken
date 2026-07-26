@@ -3,17 +3,16 @@ package com.xyrth.shrunken.client;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import alkalus.main.mixins.hooks.EntitySizeManager.OffsetContents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import alkalus.main.mixins.hooks.EntitySizeManager.OffsetContents;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
@@ -38,20 +37,21 @@ public class PlayerSizeHandler {
                     methodSetPlayerSize = ReflectionHelper.findMethod(
                         Entity.class,
                         player,
-                        new String[]{"setSize", "func_70105_a", "a"},
-                        new Class[]{Float.TYPE, Float.TYPE});
+                        new String[] { "setSize", "func_70105_a", "a" },
+                        new Class[] { Float.TYPE, Float.TYPE });
                 }
-
-                player.eyeHeight = scaledHeight * 0.9F;
+                player.eyeHeight = scaledHeight * 0.92F;
                 player.stepHeight = scaledStepHeight;
                 methodSetPlayerSize.invoke(player, (scaledWidth), (scaledHeight));
             }
         }
-        if (player.worldObj.isRemote){
-        OffsetContents contents = OffsetContents.get(player);
-        if (contents != null){
-            contents.targetOffset = 1.8F * (1.0F - ShrunkenState.getScale());
-        }
+
+        //Sets our Y-Offset using Witchery Extras Mixin
+        if (player.worldObj.isRemote) {
+            OffsetContents contents = OffsetContents.get(player);
+            if (contents != null) {
+                contents.targetOffset = 1.8F * (1.0F - scale);
+            }
         }
 
         // Change Player Speed if Scale is above 1
@@ -69,7 +69,6 @@ public class PlayerSizeHandler {
         if (!(event.entity instanceof EntityPlayer)) return;
 
         // change jump distance based on scale with a bottom of 0.5D and top of 2.0D
-        float scale = ShrunkenState.getScale();
         double jumpMultiplier = Math.min(Math.max((double) scale, 0.5D) * 1.5D, 2.0D);
         event.entityLiving.motionY *= jumpMultiplier;
     }
@@ -90,10 +89,6 @@ public class PlayerSizeHandler {
             event.setCanceled(true);
         }
 
-        // ignores inWall suffocation damage when scale is < 1.0F
-        if ("inWall".equals(event.source.getDamageType()) && ShrunkenState.getScale() < 1.0F) {
-            event.setCanceled(true);
-        }
     }
 
     @SubscribeEvent
@@ -112,10 +107,6 @@ public class PlayerSizeHandler {
             event.setCanceled(true);
         }
 
-        // ignores inWall suffocation attack when scale is < 1.0F
-        if ("inWall".equals(event.source.getDamageType()) && ShrunkenState.getScale() < 1.0F) {
-            event.setCanceled(true);
-        }
     }
 
 }
