@@ -67,14 +67,17 @@ public class PlayerSizeHandler {
             }
         }
 
-        // Change Player Speed if Scale is above 1
-        if (SERVER) {
-            if (scale > 1.0F) {
-                IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
-                double vanillaSpeed = 0.1D;
-                speedAttribute.setBaseValue(Math.min((double) vanillaSpeed * scale, 3.0D));
-            }
-        }
+        // Change player walking speed if scale > 1.0F
+//        if (SERVER) {
+//            if (scale > 1.0F) {
+//                IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+//                double scaledSpeed = Math.min(0.1D * scale, 3.0D); // Vanilla Speed is 0.1D.
+//
+//                if (speedAttribute.getBaseValue() != scaledSpeed) {
+//                    speedAttribute.setBaseValue(scaledSpeed);
+//                }
+//            }
+//        }
     }
 
     @SubscribeEvent
@@ -83,7 +86,8 @@ public class PlayerSizeHandler {
         float scale = ShrunkenState.getScale();
         double jumpMultiplier;
 
-        // Change Jump Multiplier based on scale. If Higher, we need to scale the jump Appropriately, hence the .6, Otherwise, we have a floor of 0.75.
+        // Change Jump Multiplier based on scale. If Higher, we need to scale the jump Appropriately, hence the .6,
+        // Otherwise, we have a floor of 0.75.
         if (scale > 1.0F) {
             jumpMultiplier = Math.min(Math.max((double) scale * .6D, 1.0D), 3.0D);
         } else {
@@ -137,4 +141,22 @@ public class PlayerSizeHandler {
 
     }
 
+    // @SubscribeEvent
+    // public void onPlayerTick (TickEvent.PlayerTickEvent event){
+    // if (event.phase != TickEvent.Phase.END) return;
+    // if (!(event.player instanceof EntityPlayer)) return;
+    // EntityPlayer player = event.player;
+    //
+    // float scale = ShrunkenState.getScale();
+    // if (scale <= 1.0F) return;
+    //
+    // // Change Player Speed if Scale is above 1
+    // IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+    // double scaledSpeed = Math.min(0.1D * scale, 3.0D); // Vanilla Speed is 0.1D.
+    //
+    // if (speedAttribute.getBaseValue() != scaledSpeed) {
+    // speedAttribute.setBaseValue(scaledSpeed);
+    // System.out.println("Set Speed to " + scaledSpeed);
+    // }
+    // }
 }
