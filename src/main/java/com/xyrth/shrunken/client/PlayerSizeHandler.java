@@ -81,9 +81,14 @@ public class PlayerSizeHandler {
     public void onLivingJump(LivingJumpEvent event) {
         if (!(event.entity instanceof EntityPlayer)) return;
         float scale = ShrunkenState.getScale();
+        double jumpMultiplier;
 
-        // change jump distance based on scale with a bottom of 0.5D and top of 2.0D
-        double jumpMultiplier = Math.min(Math.max((double) scale, 0.5D) * 1.5D, 2.0D);
+        // Change Jump Multiplier based on scale. If Higher, we need to scale the jump Appropriately, hence the .6, Otherwise, we have a floor of 0.75.
+        if (scale > 1.0F) {
+            jumpMultiplier = Math.min(Math.max((double) scale * .6D, 1.0D), 3.0D);
+        } else {
+            jumpMultiplier = Math.max((double) scale, 0.75D);
+        }
         event.entityLiving.motionY *= jumpMultiplier;
     }
 
