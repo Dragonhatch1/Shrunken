@@ -75,4 +75,4 @@ public class Shrunken {
 
 // TODO Arm Length if Scale above a certain Threshold
 // TODO Change Crouch to lower you more when huge
-// TODO Illegal Stances when using scales outside of Witchery's presets E.g. 0.10F, 10.0F
+// TODO Fix Extra Jump Height when scale = 1.0F
