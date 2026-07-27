@@ -75,4 +75,3 @@ public class Shrunken {
 
 // TODO Arm Length if Scale above a certain Threshold
 // TODO Change Crouch to lower you more when huge
-// TODO Speed based on scale
