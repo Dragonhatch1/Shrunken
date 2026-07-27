@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import com.xyrth.shrunken.Shrunken;
@@ -146,5 +147,17 @@ public class PlayerSizeHandler {
         if (speedAttribute.getBaseValue() != scaledSpeed) {
             speedAttribute.setBaseValue(scaledSpeed);
         }
+    }
+
+    @SubscribeEvent
+    public void onLivingFall(LivingFallEvent event){
+        if (!(event.entity instanceof EntityPlayerMP)) return;
+
+        float scale = ShrunkenState.getScale();
+        if (scale == 1.0F) return;
+
+        // Allows us to fall farther or less depending on scale. caps itself at a 0.5 or 10.0 scale.
+        float fallMultiplier = Math.max(0.5F, Math.min(scale, 10.0F));
+        event.distance /= fallMultiplier;
     }
 }
