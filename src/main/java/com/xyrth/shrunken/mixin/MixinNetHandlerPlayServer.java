@@ -1,12 +1,14 @@
 package com.xyrth.shrunken.mixin;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.xyrth.shrunken.client.ShrunkenState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.xyrth.shrunken.client.ShrunkenState;
 
 @Mixin(NetHandlerPlayServer.class)
 public class MixinNetHandlerPlayServer {

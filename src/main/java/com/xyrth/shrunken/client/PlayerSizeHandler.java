@@ -3,7 +3,6 @@ package com.xyrth.shrunken.client;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import cpw.mods.fml.common.eventhandler.EventPriority;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -64,7 +63,7 @@ public class PlayerSizeHandler {
             OffsetContents contents = OffsetContents.get(player);
             if (contents != null) {
                 float rawTarget = 1.8F * (1.0F - scale);
-                contents.targetOffset = Math.min(rawTarget, 1.52F);
+                contents.targetOffset = Math.min(rawTarget, 1.42F);
             }
         }
 

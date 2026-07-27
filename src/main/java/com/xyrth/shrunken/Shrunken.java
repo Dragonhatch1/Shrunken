@@ -75,4 +75,5 @@ public class Shrunken {
 
 // TODO Arm Length if Scale above a certain Threshold
 // TODO Change Crouch to lower you more when huge
-// TODO Fix Extra Jump Height when scale = 1.0F
+// TODO Fix Extra Jump Height when scale = 1.0F | Gives 1 extra block
+// TODO Speed not applying when big
