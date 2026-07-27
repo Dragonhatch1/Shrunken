@@ -73,5 +73,7 @@ public class Shrunken {
     }
 }
 
-// TODO Arm Length if Scale above a certain Threshold
+// TODO Arm Length if Scale above a certain Threshold 1
 // TODO Change Crouch to lower you more when huge
+// TODO Scale Fall Height when big 3
+// TODO Possible error when dying while enlarged 2

@@ -3,7 +3,6 @@ package com.xyrth.shrunken.client;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -21,6 +20,7 @@ import com.xyrth.shrunken.util.Config;
 import alkalus.main.mixins.hooks.EntitySizeManager.OffsetContents;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class PlayerSizeHandler {
@@ -130,21 +130,21 @@ public class PlayerSizeHandler {
 
     }
 
-     @SubscribeEvent
-     public void onPlayerTick (TickEvent.PlayerTickEvent event){
-     if (event.phase != TickEvent.Phase.END) return;
-     if (!(event.player instanceof EntityPlayer)) return;
-     EntityPlayer player = event.player;
+    @SubscribeEvent
+    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+        if (!(event.player instanceof EntityPlayer)) return;
+        EntityPlayer player = event.player;
 
-     float scale = ShrunkenState.getScale();
-     if (scale <= 1.0F) return;
+        float scale = ShrunkenState.getScale();
+        if (scale <= 1.0F) return;
 
-     // Change Player Speed if Scale is above 1
-     IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
-     double scaledSpeed = Math.min(0.1D * scale, 3.0D); // Vanilla Speed is 0.1D.
+        // Change Player Speed if Scale is above 1
+        IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+        double scaledSpeed = Math.min(0.1D * scale, 3.0D); // Vanilla Speed is 0.1D.
 
-     if (speedAttribute.getBaseValue() != scaledSpeed) {
-     speedAttribute.setBaseValue(scaledSpeed);
-     }
-     }
+        if (speedAttribute.getBaseValue() != scaledSpeed) {
+            speedAttribute.setBaseValue(scaledSpeed);
+        }
+    }
 }
