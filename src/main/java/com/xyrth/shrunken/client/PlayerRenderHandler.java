@@ -27,21 +27,19 @@ public class PlayerRenderHandler {
             || mc.currentScreen instanceof GuiContainerCreative;
 
         GL11.glPushMatrix();
-        if (!isInventoryPreview) {
-            if (scale < 1.0F) {
+        if (scale < 1.0F) {
 
-                // adjust y-offset based on what im riding to account for boats, minecarts, etc.
-                if (verticalOffset != 0.0F) {
-                    GL11.glTranslated(0.0, verticalOffset, 0.0);
-                }
-                GL11.glTranslated(event.x, event.y, event.z);
-                GL11.glScalef(scale, scale, scale);
-                GL11.glTranslated(-event.x, -event.y, -event.z);
-            } else {
-                GL11.glTranslated(event.x, event.y, event.z);
-                GL11.glScalef(scale, scale, scale);
-                GL11.glTranslated(-event.x, -event.y, -event.z);
+            // adjust y-offset based on what im riding to account for boats, minecarts, etc.
+            if (verticalOffset != 0.0F) {
+                GL11.glTranslated(0.0, verticalOffset, 0.0);
             }
+            GL11.glTranslated(event.x, event.y, event.z);
+            GL11.glScalef(scale, scale, scale);
+            GL11.glTranslated(-event.x, -event.y, -event.z);
+        } else {
+            GL11.glTranslated(event.x, event.y, event.z);
+            GL11.glScalef(scale, scale, scale);
+            GL11.glTranslated(-event.x, -event.y, -event.z);
         }
     }
 
