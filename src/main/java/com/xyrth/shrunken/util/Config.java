@@ -17,7 +17,7 @@ public class Config {
             scale,
             0.10F,
             15.0F,
-            "Player Scale. 1.0 = Normal, 0.5 = Half Sized | Above certain amounts the world starts to load slow. ");
+            "Player Scale. 1.0 = Normal, 0.5 = Half Sized | Above certain amounts the world starts to load slow. Above 1.0F, you need to have something in hand to hit enemies at a distance. You'll see. ");
 
         if (configuration.hasChanged()) {
             configuration.save();

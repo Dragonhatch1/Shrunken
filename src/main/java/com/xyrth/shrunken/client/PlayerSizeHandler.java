@@ -65,7 +65,7 @@ public class PlayerSizeHandler {
             if (scale > 1.0F) {
                 EntityPlayerMP playerMP = (EntityPlayerMP) player;
                 double vanillaReach = player.capabilities.isCreativeMode ? 5.0D : 4.5D;
-                double scaledReach = Math.max(vanillaReach * ((double) scale * 0.4D), vanillaReach);
+                double scaledReach = Math.max(vanillaReach * ((double) scale * 0.6D), vanillaReach);
                 double currentReach = playerMP.theItemInWorldManager.getBlockReachDistance();
 
                 if (currentReach != scaledReach) {

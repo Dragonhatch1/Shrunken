@@ -72,6 +72,3 @@ public class Shrunken {
         proxy.serverStarting(event);
     }
 }
-
-// TODO Possible error when dying while enlarged 3
-

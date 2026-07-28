@@ -1,8 +1,10 @@
 package com.xyrth.shrunken.mixin;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
@@ -31,7 +33,7 @@ public class MixinEntityRenderer {
     private double shrunken$scaleSurvivalEntityReach(double origin) {
         float scale = ShrunkenState.getScale();
         if (scale > 1.0F) {
-            return origin * ((double) scale * 0.7D);
+            return origin * ((double) scale * 0.55D);
         }
         return origin;
     }
@@ -40,7 +42,7 @@ public class MixinEntityRenderer {
     private double shrunken$scaleCreativeEntityReach(double origin) {
         float scale = ShrunkenState.getScale();
         if (scale > 1.0F) {
-            return origin * ((double) scale * 0.7D);
+            return origin * ((double) scale * 0.55D);
         }
         return origin;
     }

@@ -1,8 +1,10 @@
 package com.xyrth.shrunken.mixin;
 
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -25,6 +27,7 @@ public class MixinNetHandlerPlayServer {
         float scale = ShrunkenState.getScale();
 
         if (scale > 1.0F) {
+
             double linearReach = 6.0D * ((double) scale * 0.55D); // Creative Attack Reach 6.0D
             return linearReach * linearReach;
         }
