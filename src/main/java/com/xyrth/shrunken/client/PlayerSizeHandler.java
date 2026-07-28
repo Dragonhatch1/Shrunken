@@ -164,7 +164,7 @@ public class PlayerSizeHandler {
     }
 
     @SubscribeEvent
-    public void onLivingFall(LivingFallEvent event){
+    public void onLivingFall(LivingFallEvent event) {
         if (!(event.entity instanceof EntityPlayerMP)) return;
 
         float scale = ShrunkenState.getScale();

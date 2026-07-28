@@ -1,17 +1,23 @@
 package com.xyrth.shrunken.mixin;
 
-import com.xyrth.shrunken.client.ShrunkenState;
 import net.minecraft.entity.player.EntityPlayer;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
+import com.xyrth.shrunken.client.ShrunkenState;
+
 @Mixin(EntityPlayer.class)
 public class MixinEntityPlayer {
 
-    @ModifyArgs(method = "onLivingUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/AxisAlignedBB;expand(DDD)Lnet/minecraft/util/AxisAlignedBB;"))
-    private void shrunken$scalePickupRadius(Args args){
+    @ModifyArgs(
+        method = "onLivingUpdate",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/util/AxisAlignedBB;expand(DDD)Lnet/minecraft/util/AxisAlignedBB;"))
+    private void shrunken$scalePickupRadius(Args args) {
         float scale = ShrunkenState.getScale();
         if (scale <= 1.0F) return;
 
