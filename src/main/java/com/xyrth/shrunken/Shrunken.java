@@ -73,6 +73,5 @@ public class Shrunken {
     }
 }
 
-// TODO Arm Length if Scale above a certain Threshold 1
-// TODO Change Crouch to lower you more when huge
-// TODO Possible error when dying while enlarged 2
+// TODO Possible error when dying while enlarged 3
+// TODO Scale Players pickup radius with size scale

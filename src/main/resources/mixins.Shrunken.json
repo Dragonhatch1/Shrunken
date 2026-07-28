@@ -9,7 +9,8 @@
     "MixinNetHandlerPlayServer"
   ],
   "client": [
-    "MixinEntityRenderer"
+    "MixinEntityRenderer",
+    "MixinPlayerControllerMP"
   ],
   "server": [],
   "refmap": "mixins.Shrunken.refmap.json"

@@ -60,6 +60,20 @@ public class PlayerSizeHandler {
             }
         }
 
+        // Scales Block Reach based on size. Only care about Big bois
+        if (SERVER) {
+            if (scale > 1.0F) {
+                EntityPlayerMP playerMP = (EntityPlayerMP) player;
+                double vanillaReach = player.capabilities.isCreativeMode ? 5.0D : 4.5D;
+                double scaledReach = Math.max(vanillaReach * ((double) scale * 0.4D), vanillaReach);
+                double currentReach = playerMP.theItemInWorldManager.getBlockReachDistance();
+
+                if (currentReach != scaledReach) {
+                    playerMP.theItemInWorldManager.setBlockReachDistance(scaledReach);
+                }
+            }
+        }
+
         // Sets our Y-Offset using Witchery Extras Mixin
         if (CLIENT) {
             OffsetContents contents = OffsetContents.get(player);
@@ -79,7 +93,7 @@ public class PlayerSizeHandler {
         // Change Jump Multiplier based on scale. If Higher, we need to scale the jump Appropriately, hence the .6,
         // Otherwise, we have a floor of 0.75.
         if (scale > 1.0F) {
-            jumpMultiplier = Math.min(Math.max((double) scale * .6D, 1.0D), 3.0D);
+            jumpMultiplier = Math.min(Math.max((double) scale * .4D, 1.0D), 3.0D);
         } else {
             jumpMultiplier = Math.max((double) scale, 0.75D);
         }
@@ -157,7 +171,7 @@ public class PlayerSizeHandler {
         if (scale == 1.0F) return;
 
         // Allows us to fall farther or less depending on scale. caps itself at a 0.5 or 10.0 scale.
-        float fallMultiplier = Math.max(0.5F, Math.min(scale, 10.0F));
+        float fallMultiplier = Math.max(0.5F, Math.min(scale, 7.0F));
         event.distance /= fallMultiplier;
     }
 }

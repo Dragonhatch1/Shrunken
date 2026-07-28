@@ -15,8 +15,8 @@ public class Config {
             "scale",
             Configuration.CATEGORY_GENERAL,
             scale,
-            0.01F,
-            30.0F,
+            0.10F,
+            15.0F,
             "Player Scale. 1.0 = Normal, 0.5 = Half Sized | Above certain amounts the world starts to load slow. ");
 
         if (configuration.hasChanged()) {
