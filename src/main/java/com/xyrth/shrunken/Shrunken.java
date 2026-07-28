@@ -74,4 +74,4 @@ public class Shrunken {
 }
 
 // TODO Possible error when dying while enlarged 3
-// TODO Scale Players pickup radius with size scale
+
